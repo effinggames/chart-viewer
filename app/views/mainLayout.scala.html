@@ -1,0 +1,42 @@
+@import play.api.libs.json.Json
+@import play.api.libs.json.JsValue
+@import java.time.format.DateTimeFormatter
+
+@(title: String, allBacktests: Seq[BacktestRun], data: JsValue = Json.obj())(content: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("app.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("img/favicon.ico")">
+    </head>
+    <body ng-controller="MainCtrl">
+        <div id="wrapper">
+            <div id="sidebar">
+                <h2 class="p18">Backtests</h2>
+                <ul>
+                    @for(backtest <- allBacktests) {
+                        <li>
+                            <a href="@routes.BacktestRunController.getBacktestRun(backtest.id)">
+                                <div class="p14">
+                                    Backtest -
+                                    @backtest.algoResults.last.historicalDates.head.format(DateTimeFormatter.ofPattern("yyyy-MM"))
+                                    to
+                                    @backtest.algoResults.last.historicalDates.last.format(DateTimeFormatter.ofPattern("yyyy-MM"))</div>
+                                <div class="p14">@backtest.algoResults.map(_.algoName).mkString(", ")</div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div id="mainContent">
+                @content
+            </div>
+        </div>
+        <script type="text/javascript">
+            window.data = @Html(Json.stringify(data));
+        </script>
+        <script src="@routes.Assets.versioned("app.js")" type="text/javascript" data-no-instant></script>
+    </body>
+</html>

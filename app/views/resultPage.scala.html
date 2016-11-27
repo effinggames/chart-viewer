@@ -1,0 +1,64 @@
+@import play.api.libs.json.Json
+@import util.MathHelper
+
+@(allBacktests: Seq[BacktestRun], displayedBacktest: BacktestRun)
+
+@mainLayout(
+    s"Algo Results - ${displayedBacktest.algoResults.map(_.algoName).mkString(", ")}",
+    allBacktests,
+    Json.toJson(displayedBacktest)
+) {
+    <div id="resultPage">
+        <h1 class="p24">Algo Results - @displayedBacktest.algoResults.map(_.algoName).mkString(", ")</h1>
+        <div class="backtestChart" backtest-chart chart-data="$window.data">
+        </div>
+        <div class="metricTable p16">
+            <table>
+                <thead>
+                    <th></th>
+                    @for(algo <- displayedBacktest.algoResults) {
+                        <th>@algo.algoName</th>
+                    }
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ann. Returns</td>
+                        @for(algo <- displayedBacktest.algoResults) {
+                            <td>@MathHelper.roundDecimals(algo.annReturns * 100, 1)%</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>Ann. Vol</td>
+                        @for(algo <- displayedBacktest.algoResults) {
+                            <td>@MathHelper.roundDecimals(algo.annVolatility * 100, 1)%</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>Max DD</td>
+                        @for(algo <- displayedBacktest.algoResults) {
+                            <td>@MathHelper.roundDecimals(algo.maxDrawdown * 100, 1)%</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>Sharpe</td>
+                        @for(algo <- displayedBacktest.algoResults) {
+                            <td>@algo.sharpe</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>Sortino</td>
+                        @for(algo <- displayedBacktest.algoResults) {
+                            <td>@algo.sortino</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>Calmar 3 yr</td>
+                        @for(algo <- displayedBacktest.algoResults) {
+                            <td>@algo.calmar</td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

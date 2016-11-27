@@ -1,0 +1,77 @@
+@import 'nib'
+
+$sidebarWidth = 250px;
+
+#instantclick {
+    display: none;
+}
+html {
+    height: 100%;
+}
+body {
+    color: #333;
+    font-family: helvetica, 'lucida grande', tahoma, verdana, arial, sans-serif;
+    font-size: 12px;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    text-size-adjust: 100%;
+}
+#wrapper {
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 0;
+    height: 100%;
+    margin: 0 auto;
+    min-width: 980px;
+    padding: 25px;
+    text-align: center;
+    width: 100%
+}
+#sidebar {
+    box-sizing: border-box;
+    background-color: #ccc;
+    display: inline-block;
+    float: left;
+    height: 100%;
+    overflow-y: auto;
+    padding: 8px 10px;
+    width: $sidebarWidth;
+    ul {
+        text-align: left;
+    }
+    li {
+        border-bottom: 1px solid #333;
+        &:first-child {
+            border-top: 1px solid #333;
+        }
+        a {
+            box-sizing: border-box;
+            height: 100%;
+            padding: 2px 4px;
+            width: 100%;
+            &:hover {
+                background-color: #bbb;
+            }
+        }
+    }
+}
+#mainContent {
+    box-sizing: border-box;
+    height: 100%;
+    margin-left: $sidebarWidth;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#resultPage {
+    .backtestChart {
+        height: 400px;
+    }
+    .metricTable table {
+        margin: 0 auto;
+        th {
+            padding: 0 5px;
+        }
+    }
+}

@@ -2,7 +2,7 @@
 @import play.api.libs.json.JsValue
 @import java.time.format.DateTimeFormatter
 
-@(title: String, allBacktests: Seq[BacktestRun], data: JsValue = Json.obj())(content: Html)
+@(title: String, allBacktests: Seq[BacktestWithResults], data: JsValue = Json.obj())(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,14 +16,14 @@
             <div id="sidebar">
                 <h2 class="p18">Backtests</h2>
                 <ul>
-                    @for(backtest <- allBacktests) {
+                    @for((backtest, index) <- allBacktests.zipWithIndex) {
                         <li>
-                            <a href="@routes.BacktestRunController.getBacktestRun(backtest.id)">
+                            <a href="@routes.BacktestRunController.getBacktestRun(backtest.displayId)">
                                 <div class="p14">
-                                    Backtest -
-                                    @backtest.algoResults.last.historicalDates.head.format(DateTimeFormatter.ofPattern("yyyy-MM"))
+                                    #@(f"${allBacktests.length - index}%02d") -
+                                    @backtest.algoResults.last.historicalDates.head
                                     to
-                                    @backtest.algoResults.last.historicalDates.last.format(DateTimeFormatter.ofPattern("yyyy-MM"))</div>
+                                    @backtest.algoResults.last.historicalDates.last</div>
                                 <div class="p14">@backtest.algoResults.map(_.algoName).mkString(", ")</div>
                             </a>
                         </li>

@@ -6,13 +6,13 @@ import services.BacktestRunService
 
 class BacktestRunController(backtestRunService: BacktestRunService) extends Controller {
   def getAllBacktests = Action {
-    val allBacktests = backtestRunService.getAllBacktestRuns
+    val allBacktests = backtestRunService.getAllBacktests
     Ok(views.html.indexPage(allBacktests))
   }
 
-  def getBacktestRun(id: String) = Action {
-    val allBacktests = backtestRunService.getAllBacktestRuns
-    val displayedBacktest = backtestRunService.getBacktestRun(id)
+  def getBacktestRun(displayId: String) = Action {
+    val allBacktests = backtestRunService.getAllBacktests
+    val displayedBacktest = backtestRunService.getBacktest(displayId)
 
     if (displayedBacktest.isDefined) {
       Ok(views.html.resultPage(allBacktests, displayedBacktest.get))

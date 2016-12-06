@@ -1,6 +1,6 @@
 
 GET        /                             controllers.BacktestRunController.getAllBacktests
 GET        /backtest                     controllers.BacktestRunController.getAllBacktests
-GET        /backtest/:id                 controllers.BacktestRunController.getBacktestRun(id)
+GET        /backtest/:displayId          controllers.BacktestRunController.getBacktestRun(displayId)
 
 GET        /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)

@@ -4,9 +4,20 @@ import java.time.{LocalDate, LocalDateTime}
 
 import play.api.libs.json.Json
 
+trait BacktestTrait {
+  val date: LocalDateTime
+  val displayId: String
+  val id: Option[Int]
+}
+
+case class Backtest(
+  date: LocalDateTime,
+  displayId: String,
+  id: Option[Int] = None
+) extends BacktestTrait
+
 case class AlgoResult(
   algoName: String,
-  date: LocalDateTime,
   annReturns: Double,
   annVolatility: Double,
   maxDrawdown: Double,
@@ -15,19 +26,28 @@ case class AlgoResult(
   calmar: Option[Double],
   historicalValues: Seq[Double],
   historicalDates: Seq[LocalDate],
-  backtestId: String = "foobar"
+  backtestId: Option[Int] = None
 )
 
 object AlgoResult {
   implicit val AlgoResultFormat = Json.format[AlgoResult]
 }
 
-case class BacktestRun(
-  id: String,
+case class BacktestWithResults(
   date: LocalDateTime,
+  displayId: String,
+  id: Option[Int] = None,
   algoResults: Seq[AlgoResult]
-)
+) extends BacktestTrait
 
-object BacktestRun {
-  implicit val BacktestRunFormat = Json.format[BacktestRun]
+object BacktestWithResults {
+  def apply(backtest: Backtest, algoResults: Seq[AlgoResult]): BacktestWithResults = {
+    new BacktestWithResults(
+      backtest.date,
+      backtest.displayId,
+      backtest.id,
+      algoResults
+    )
+  }
+  implicit val BacktestWithResultsFormat = Json.format[BacktestWithResults]
 }

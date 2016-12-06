@@ -1,7 +1,7 @@
 @import play.api.libs.json.Json
 @import util.MathHelper
 
-@(allBacktests: Seq[BacktestRun], displayedBacktest: BacktestRun)
+@(allBacktests: Seq[BacktestWithResults], displayedBacktest: BacktestWithResults)
 
 @mainLayout(
     s"Algo Results - ${displayedBacktest.algoResults.map(_.algoName).mkString(", ")}",

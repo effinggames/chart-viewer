@@ -9,7 +9,6 @@ angular.module('app')
                 chartData: '&'
             },
             link: function ($scope, $elem, $attrs) {
-                console.log("chartData", $scope.chartData());
                 const algoResults = $scope.chartData().algoResults;
                 const series = algoResults.map(function(algoResult) {
                     const startingValue = algoResult.historicalValues[0];

@@ -7,13 +7,13 @@ import play.api.libs.json.Json
 trait BacktestTrait {
   val date: LocalDateTime
   val displayId: String
-  val id: Option[Int]
+  val id: Int
 }
 
 case class Backtest(
   date: LocalDateTime,
   displayId: String,
-  id: Option[Int] = None
+  id: Int = 0
 ) extends BacktestTrait
 
 case class AlgoResult(
@@ -26,7 +26,7 @@ case class AlgoResult(
   calmar: Option[Double],
   historicalValues: Seq[Double],
   historicalDates: Seq[LocalDate],
-  backtestId: Option[Int] = None
+  backtestId: Int = 0
 )
 
 object AlgoResult {
@@ -36,7 +36,7 @@ object AlgoResult {
 case class BacktestWithResults(
   date: LocalDateTime,
   displayId: String,
-  id: Option[Int] = None,
+  id: Int,
   algoResults: Seq[AlgoResult]
 ) extends BacktestTrait
 

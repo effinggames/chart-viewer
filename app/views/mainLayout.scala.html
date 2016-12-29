@@ -16,11 +16,11 @@
             <div id="sidebar">
                 <h2 class="p18">Backtests</h2>
                 <ul>
-                    @for((backtest, index) <- allBacktests.zipWithIndex) {
+                    @for(backtest <- allBacktests.reverse) {
                         <li>
-                            <a href="@routes.BacktestRunController.getBacktestRun(backtest.displayId)">
+                            <a href="@routes.BacktestController.getBacktest(backtest.displayId)">
                                 <div class="p14">
-                                    #@(f"${allBacktests.length - index}%02d") -
+                                    #@(f"${backtest.id}%02d") -
                                     @backtest.algoResults.last.historicalDates.head
                                     to
                                     @backtest.algoResults.last.historicalDates.last</div>

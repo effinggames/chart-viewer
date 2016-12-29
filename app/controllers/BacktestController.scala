@@ -2,15 +2,15 @@ package controllers
 
 import play.api.mvc.{Action, Controller}
 
-import services.BacktestRunService
+import services.BacktestService
 
-class BacktestRunController(backtestRunService: BacktestRunService) extends Controller {
+class BacktestController(backtestRunService: BacktestService) extends Controller {
   def getAllBacktests = Action {
     val allBacktests = backtestRunService.getAllBacktests
     Ok(views.html.indexPage(allBacktests))
   }
 
-  def getBacktestRun(displayId: String) = Action {
+  def getBacktest(displayId: String) = Action {
     val allBacktests = backtestRunService.getAllBacktests
     val displayedBacktest = backtestRunService.getBacktest(displayId)
 

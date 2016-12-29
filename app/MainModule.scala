@@ -1,5 +1,5 @@
-import controllers.BacktestRunController
-import services.BacktestRunService
+import controllers.BacktestController
+import services.BacktestService
 
 /**
   * Add all the MacWire DI dependencies here.
@@ -7,7 +7,7 @@ import services.BacktestRunService
 trait MainModule {
   import com.softwaremill.macwire._
 
-  lazy val resultController = wire[BacktestRunController]
+  lazy val resultController = wire[BacktestController]
 
-  lazy val resultService = wire[BacktestRunService]
+  lazy val resultService = wire[BacktestService]
 }

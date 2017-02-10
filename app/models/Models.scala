@@ -10,12 +10,14 @@ trait BacktestTrait {
   val id: Int
 }
 
+//Database model
 case class Backtest(
   date: LocalDateTime,
   displayId: String,
   id: Int = 0
 ) extends BacktestTrait
 
+//Database model
 case class AlgoResult(
   algoName: String,
   annReturns: Double,
@@ -43,10 +45,10 @@ case class BacktestWithResults(
 object BacktestWithResults {
   def apply(backtest: Backtest, algoResults: Seq[AlgoResult]): BacktestWithResults = {
     new BacktestWithResults(
-      backtest.date,
-      backtest.displayId,
-      backtest.id,
-      algoResults
+      date = backtest.date,
+      displayId = backtest.displayId,
+      id = backtest.id,
+      algoResults = algoResults
     )
   }
   implicit val BacktestWithResultsFormat = Json.format[BacktestWithResults]

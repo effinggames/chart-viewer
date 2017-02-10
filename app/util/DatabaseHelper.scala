@@ -16,11 +16,11 @@ object DatabaseHelper {
     }
   }
   implicit val StringSeqEncoder: Encoder[Seq[String]] = encoder[Seq[String]]( resultSet =>
-      (index, seq) => {
-        val conn = resultSet.getConnection
-        resultSet.setArray(index, conn.createArrayOf("TEXT", seq.toArray))
-      },
-      java.sql.Types.ARRAY
+    (index, seq) => {
+      val conn = resultSet.getConnection
+      resultSet.setArray(index, conn.createArrayOf("TEXT", seq.toArray))
+    },
+    java.sql.Types.ARRAY
   )
   implicit val DoubleSeqDecoder: Decoder[Seq[Double]] = decoder[Seq[Double]] { resultSet => {
       index => {

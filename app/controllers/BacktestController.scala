@@ -1,23 +1,31 @@
 package controllers
 
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{AnyContent, Action, Controller}
 
 import services.BacktestService
 
 class BacktestController(backtestRunService: BacktestService) extends Controller {
-  def getAllBacktests = Action {
+  /**
+    * Gets all recent backtests and renders the index page html.
+    * @return Returns the rendered html for the index page.
+    */
+  def getAllBacktests: Action[AnyContent] = Action { request =>
     val allBacktests = backtestRunService.getAllBacktests
+
     Ok(views.html.indexPage(allBacktests))
   }
 
-  def getBacktest(displayId: String) = Action {
+  /**
+    * Gets a specific backtest and renders the result page html.
+    * @return Returns the rendered html for the results page.
+    */
+  def getBacktest(displayId: String): Action[AnyContent] = Action { request =>
     val allBacktests = backtestRunService.getAllBacktests
-    val displayedBacktest = backtestRunService.getBacktest(displayId)
+    val selectedBacktest = backtestRunService.getBacktest(displayId)
 
-    if (displayedBacktest.isDefined) {
-      Ok(views.html.resultPage(allBacktests, displayedBacktest.get))
-    } else {
-      NotFound
+    selectedBacktest match {
+      case Some(backtest) => Ok(views.html.resultPage(allBacktests, backtest))
+      case _ => NotFound
     }
   }
 }

@@ -7,7 +7,7 @@ import services.BacktestService
 class BacktestController(backtestRunService: BacktestService) extends Controller {
   /**
     * Gets all recent backtests and renders the index page html.
-    * @return Returns the rendered html for the index page.
+    * @return Returns rendered html for the index page.
     */
   def getAllBacktests: Action[AnyContent] = Action { request =>
     val allBacktests = backtestRunService.getAllBacktests
@@ -17,7 +17,7 @@ class BacktestController(backtestRunService: BacktestService) extends Controller
 
   /**
     * Gets a specific backtest and renders the result page html.
-    * @return Returns the rendered html for the results page.
+    * @return Returns rendered html for the results page.
     */
   def getBacktest(displayId: String): Action[AnyContent] = Action { request =>
     val allBacktests = backtestRunService.getAllBacktests

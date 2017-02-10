@@ -7,7 +7,7 @@ Using Play Framework, Quill, Node/Npm/Gulp, and Highcharts.
 To run:  
 Make sure you have node/npm installed.  
 Fill out env vars.  
-`sbt run`  
+Then `sbt run`  
 
 Env Vars:  
 `DATABASE_USER`  

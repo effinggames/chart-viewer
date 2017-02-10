@@ -22,6 +22,7 @@ object DatabaseHelper {
     },
     java.sql.Types.ARRAY
   )
+
   implicit val DoubleSeqDecoder: Decoder[Seq[Double]] = decoder[Seq[Double]] { resultSet => {
       index => {
         resultSet.getArray(index).getArray.asInstanceOf[Array[java.math.BigDecimal]].map(_.doubleValue())
@@ -35,6 +36,7 @@ object DatabaseHelper {
     },
     java.sql.Types.ARRAY
   )
+
   implicit val LocalDateSeqDecoder: Decoder[Seq[LocalDate]] = decoder[Seq[LocalDate]] { resultSet => {
       index => {
         resultSet.getArray(index).getArray.asInstanceOf[Array[java.sql.Date]].map(_.toLocalDate)

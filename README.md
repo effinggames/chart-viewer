@@ -1,6 +1,6 @@
 # Chart-viewer
 
-Companion charting app to stock-trader. Easy interface to see previous results and historical performance.
+Companion charting app to stock-trader. Easy interface to see previous results and historical performance.    
 
 Using Play Framework, Quill, Node/Npm/Gulp, and Highcharts.
 

@@ -202,7 +202,7 @@ gulp.task('build', ['clean'], function() {
   return merge(copyAssets(), concatCSS(false), webpackAppJS(true)).on(
     'end',
     function() {
-      minifyImages();
+      // minifyImages();
       revFiles().on('end', function() {
         concatCSS(true);
       });
